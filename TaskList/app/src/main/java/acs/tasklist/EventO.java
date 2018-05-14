@@ -10,7 +10,7 @@ public class EventO extends OtherO{
     }
     @Override
     public String formatInfo(){
-        return desc+" "+loc+" "+time+" "+duedate;
+        return "Due: "+duedate+"\n"+"Description: "+desc+"\n"+"Location: "+loc+"\n"+"Time: "+time+"\n";
     }
     @Override
     public char getID(){

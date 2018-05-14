@@ -84,7 +84,6 @@
         android:inputType="textPersonName"></EditText>
 
 
-
     <Button
         android:id="@+id/button8"
         android:layout_width="wrap_content"
@@ -92,6 +91,7 @@
         android:layout_alignEnd="@+id/textView8"
         android:layout_alignParentBottom="true"
         android:layout_alignRight="@+id/textView8"
+        android:onClick="addEvent"
         android:text="ADD TASK" />
 
     <Button
