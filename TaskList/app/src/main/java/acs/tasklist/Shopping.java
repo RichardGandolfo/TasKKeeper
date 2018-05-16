@@ -10,6 +10,7 @@ import android.widget.ArrayAdapter;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -70,11 +71,16 @@ public class Shopping extends Activity {
         shopping.setDueDate(formattedDate);
         if(!description.trim().isEmpty() && !shopping.list.isEmpty()) {
             Intent i = new Intent(this, TaskList.class);
+            i.putExtra("bool", 1);
             SharedPreferences.Editor editor = shared.edit();
             editor.putString(Integer.toString(shared.getInt("next", 1)), shopping.formatInfo());
             editor.putInt("next", shared.getInt("next", 1)+1);
             editor.commit();
             startActivity(i);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "All fields must be filled out",
+                    Toast.LENGTH_LONG).show();
         }
     }
 }

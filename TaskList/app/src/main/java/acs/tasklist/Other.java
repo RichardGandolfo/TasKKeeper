@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
@@ -48,11 +49,16 @@ public class Other extends Activity {
         shared = getSharedPreferences("tasks", Context.MODE_PRIVATE);
         if(!description.trim().isEmpty()) {
             Intent i = new Intent(this, TaskList.class);
+            i.putExtra("bool", 1);
             SharedPreferences.Editor editor = shared.edit();
             editor.putString(Integer.toString(shared.getInt("next", 1)), other.formatInfo());
             editor.putInt("next", shared.getInt("next", 1)+1);
             editor.commit();
             startActivity(i);
+        }
+        else{
+            Toast.makeText(getApplicationContext(), "All fields must be filled out",
+                    Toast.LENGTH_LONG).show();
         }
     }
 }
