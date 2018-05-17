@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#87CEEB"
+    android:background="#b9c2f8"
     >
 
     <TextView
@@ -54,9 +54,11 @@
         android:id="@+id/button8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/textView8"
         android:layout_alignParentBottom="true"
-        android:layout_alignRight="@+id/textView8"
+        android:layout_marginLeft="12dp"
+        android:layout_marginStart="12dp"
+        android:layout_toEndOf="@+id/textView2"
+        android:layout_toRightOf="@+id/textView2"
         android:onClick="addOther"
         android:text="ADD TASK" />
 
@@ -64,9 +66,11 @@
         android:id="@+id/button10"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/simpleDatePicker"
         android:layout_alignParentBottom="true"
-        android:layout_alignStart="@+id/simpleDatePicker"
+        android:layout_marginEnd="11dp"
+        android:layout_marginRight="11dp"
+        android:layout_toLeftOf="@+id/textView2"
+        android:layout_toStartOf="@+id/textView2"
         android:onClick="cancel"
         android:text="CANCEL" />
 

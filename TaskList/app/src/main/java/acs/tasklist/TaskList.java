@@ -9,6 +9,7 @@ import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -29,7 +30,7 @@ public class TaskList extends Activity {
         Intent intent = getIntent();
         if(intent.hasExtra("bool")){
             Toast.makeText(getApplicationContext(), "Task added successfully",
-                    Toast.LENGTH_LONG).show();
+                    Toast.LENGTH_SHORT).show();
         }
         shared = getSharedPreferences("tasks", Context.MODE_PRIVATE);
         mListView = findViewById(R.id.lvx);
@@ -43,6 +44,44 @@ public class TaskList extends Activity {
 
         //if(i.hasExtra("OtherO")||i.hasExtra("EventO")||i.hasExtra("ShoppingO")||i.hasExtra("HomeworkO")){list.add(i.getStringExtra("OtherO"));}
         mListView.setAdapter(adapter);
+
+        final AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(this);
+
+        // ListView on item selected listener.
+        mListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
+        {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view,
+                                    final int position, long id) {
+                builder.setTitle("Complete Task")
+                        .setMessage("Are you sure that you want to complete the following task?\n\n"+list.get(position))
+                        .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                shared = getSharedPreferences("tasks", Context.MODE_PRIVATE);
+                                SharedPreferences.Editor e = shared.edit();
+                                for(int i=0; i<=shared.getInt("next", 1); i++){
+                                    if(list.get(position).equals(shared.getString(Integer.toString(i),""))){
+                                        e.remove(Integer.toString(i));
+                                        e.commit();
+                                        break;
+                                    }
+                                }
+                                list.remove(position);
+                                adapter.notifyDataSetChanged();
+                                Toast.makeText(getApplicationContext(), "Task completed",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        })
+                        .setNegativeButton(android.R.string.no, new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int which) {
+                                // do nothing
+                            }
+                        })
+                        .setIcon(android.R.drawable.ic_dialog_alert)
+                        .show();
+            }
+        });
     }
 
     public void goBack(View v)
@@ -55,8 +94,8 @@ public class TaskList extends Activity {
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this);
 
-        builder.setTitle("Complete All")
-                .setMessage("Are you sure you want to complete all of your tasks?")
+        builder.setTitle("Complete All Tasks")
+                .setMessage("Are you sure that you want to complete all of your tasks?")
                 .setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int which) {
                         shared = getSharedPreferences("tasks", Context.MODE_PRIVATE);
@@ -64,7 +103,7 @@ public class TaskList extends Activity {
                         e.clear();
                         e.commit();
                         Toast.makeText(getApplicationContext(), "All tasks were completed",
-                                Toast.LENGTH_LONG).show();
+                                Toast.LENGTH_SHORT).show();
                         list.clear();
                         adapter.notifyDataSetChanged();
                     }
