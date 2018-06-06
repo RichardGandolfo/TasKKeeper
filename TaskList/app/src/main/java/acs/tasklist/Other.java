@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+// Handles process of adding a new Other task to task list
 public class Other extends Activity {
 
     OtherO other = new OtherO();
@@ -31,6 +32,7 @@ public class Other extends Activity {
         startActivity(i);
     }
 
+    // Gets all input info from user, sets values of other object using it, stores in DB and adds it
     public void addOther(View v)
     {
         EditText editText = (EditText) findViewById(R.id.EditTextName2);

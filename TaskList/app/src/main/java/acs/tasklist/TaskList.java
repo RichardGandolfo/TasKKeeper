@@ -15,14 +15,21 @@ import android.widget.ListView;
 import android.widget.Toast;
 
 import java.io.ObjectOutput;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.Date;
 
+// This class maintains and displays a list of all tasks entered by the user, sorted in order of
+// earliest due date first
 public class TaskList extends Activity {
     private ListView mListView;
     SharedPreferences shared;
     ArrayList<String> list;
     ArrayAdapter adapter;
 
+    // Reads data from DB, loads into array, listview displays to user on screen
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,6 +47,32 @@ public class TaskList extends Activity {
             item = shared.getString(Integer.toString(i),"");
             if(!item.equals("")) list.add(item);
         }
+
+        class SortByDate implements Comparator<String>{
+            String d1 = new String();
+            String d2 = new String();
+            Date date1;
+            Date date2;
+
+            public void toDate() throws Exception{
+                date1=new SimpleDateFormat("MM-dd-yyyy").parse(d1);
+                date2=new SimpleDateFormat("MM-dd-yyyy").parse(d2);
+            }
+
+            public int compare(String a, String b){
+                d1 = a.substring(5, 15);
+                d2 = b.substring(5, 15);
+                try {
+                    toDate();
+                }
+                catch (Exception e){
+                    // never will throw exception
+                }
+                if (date1.before(date2)) return -1;
+                else return 1;
+            }
+        }
+        Collections.sort(list, new SortByDate());
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, list);
 
         //if(i.hasExtra("OtherO")||i.hasExtra("EventO")||i.hasExtra("ShoppingO")||i.hasExtra("HomeworkO")){list.add(i.getStringExtra("OtherO"));}
@@ -48,7 +81,7 @@ public class TaskList extends Activity {
         final AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this);
 
-        // ListView on item selected listener.
+        // ListView on item selected listener, user can delete clicked on items
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override
@@ -90,6 +123,7 @@ public class TaskList extends Activity {
         startActivity(i);
     }
 
+    // Completes all tasks that the user has in their list
     public void clear(View v){
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(this);

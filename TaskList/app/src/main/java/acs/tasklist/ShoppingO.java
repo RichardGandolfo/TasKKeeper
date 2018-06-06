@@ -2,6 +2,7 @@ package acs.tasklist;
 
 import java.util.ArrayList;
 
+// Inherits from OtherO class, holds info for shopping task and has arraylist to store list
 public class ShoppingO extends OtherO{
     ArrayList<String> list = new ArrayList<String>();
     public void addItem(String input){

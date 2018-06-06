@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+// Handles process of adding a shopping object task to task list
 public class Shopping extends Activity {
     private ListView list;
     ShoppingO shopping = new ShoppingO();
@@ -36,6 +37,7 @@ public class Shopping extends Activity {
         list.setAdapter(adapter);
     }
 
+    // Adds item to arraylist of ShoppingO object
     public void addItem(View v)
     {
         String item;
@@ -54,6 +56,7 @@ public class Shopping extends Activity {
         startActivity(i);
     }
 
+    // Gets all input info from user, sets values of shopping object using it, stores in DB and adds it
     public void addShopping(View v)
     {
         EditText editText = (EditText) findViewById(R.id.EditTextName2);

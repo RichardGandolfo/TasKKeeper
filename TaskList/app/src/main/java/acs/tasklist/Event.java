@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 
+// Handles process of adding an Event object task to task list
 public class Event extends Activity {
 
     EventO event = new EventO();
@@ -28,12 +29,14 @@ public class Event extends Activity {
         shared = getSharedPreferences("tasks", Context.MODE_PRIVATE);
     }
 
+    // Goes home
     public void cancel(View v)
     {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
+    // Gets all input info from user, sets values of event object using it, stores in DB and adds it
     public void addEvent(View v)
     {
         EditText editText = (EditText) findViewById(R.id.EditTextName2);

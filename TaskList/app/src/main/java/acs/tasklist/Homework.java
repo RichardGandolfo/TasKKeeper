@@ -13,6 +13,7 @@ import android.widget.Toast;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+// Handles process of adding a homework object task to task list
 public class Homework extends Activity {
 
     HomeworkO homework = new HomeworkO();
@@ -31,6 +32,7 @@ public class Homework extends Activity {
         startActivity(i);
     }
 
+    // Gets all input info from user, sets values of homework object using it, stores in DB and adds it
     public void addHomework(View v)
     {
         EditText editText = (EditText) findViewById(R.id.EditTextName2);

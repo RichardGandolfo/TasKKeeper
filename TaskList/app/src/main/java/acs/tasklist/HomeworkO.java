@@ -1,5 +1,6 @@
 package acs.tasklist;
 
+// Inherits from OtherO class, stores info about an upcoming homework assignment
 public class HomeworkO extends OtherO{
     String subject;
     public void setSubject(String input){

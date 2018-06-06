@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
 
+// Menu page to select type of task
 public class AddTask extends Activity {
 
     @Override
@@ -32,30 +33,35 @@ public class AddTask extends Activity {
         b.setTextColor(Color.WHITE);
     }
 
+    // Goes to home
     public void goBack(View v)
     {
         Intent i = new Intent(this, MainActivity.class);
         startActivity(i);
     }
 
+    // Goes to shopping page
     public void toShopping(View v)
     {
         Intent i = new Intent(this, Shopping.class);
         startActivity(i);
     }
 
+    // Goes to homework page
     public void toHomework(View v)
     {
         Intent i = new Intent(this, Homework.class);
         startActivity(i);
     }
 
+    // Goes to event page
     public void ToEvent(View v)
     {
         Intent i = new Intent(this, Event.class);
         startActivity(i);
     }
 
+    // Goes to other page
     public void ToOther(View v)
     {
         Intent i = new Intent(this, Other.class);

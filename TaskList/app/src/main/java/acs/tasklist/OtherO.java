@@ -1,5 +1,6 @@
 package acs.tasklist;
 
+// Super class, all other task classes inherit from this
 public class OtherO {
     String desc;
     String duedate;
